@@ -1,0 +1,14 @@
+{
+    "0003912128": {
+        "allowRandom": false,
+        "mode": "hsp",
+        "name": "Janosch - Hallo Schiff Pyjamahose",
+        "path": "janosch/schiff-pyjamahose"
+    },
+    "0003908652": {
+        "allowRandom": true,
+        "mode": "kindermusik",
+        "name": "Eule findet den Beat auf Europatour",
+        "path": "misc/eule-europa"
+    }
+}
