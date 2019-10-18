@@ -2,12 +2,15 @@
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:8080');
 
-//Config-Datei lesen mit gueltigen RFID-Codes
+//Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
-const configObj = fs.readJsonSync('./config.json');
+const inputConfig = fs.readJsonSync(__dirname + '/input_config.json');
+const cardConfig = fs.readJsonSync(__dirname + '/card_config.json');
 
-//Keyboard Events auslesen (USB-RFID Reader funkgiert als Tastatur)
-const ioHook = require('iohook');
+//Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
+const InputEvent = require('input-event');
+const input = new InputEvent(inputConfig.input);
+const keyboard = new InputEvent.Keyboard(input);
 
 //RFID-Code wird aus 10 einzelnen Ziffern + Enter geabut
 var rfidCode = "";
@@ -17,16 +20,17 @@ ws.on('open', function open() {
     console.log("connected to wss");
 
     //Wenn eine Taste gedrueckt wird
-    ioHook.on("keydown", event => {
-        const rawcode = event.rawcode;
+    keyboard.on('keyup', (event) => {
+        const rawcode = event.code;
 
         //RFID-Codelaenge wurde noch nicht erreicht
         if (rfidCode.length < 10) {
 
-            //Wenn Code im Ziffernbereich (48-57 = 0-9) liegt -> RFID-Code verlaengern (Code 53 entspricht Ziffer 5)
-            if (rawcode >= 48 && rawcode <= 57) {
-                console.log("add digit to code");
-                rfidCode += (rawcode - 48);
+            //Wenn Code im Ziffernbereich (2-11 = 0-9) liegt -> Ziffer berechnen (Code 2 entspricht Ziffer 1) und RFID-Code verlaengern
+            if (rawcode >= 2 && rawcode <= 11) {
+                const digit = ((rawcode - 1) % 10)
+                console.log("add digit to code " + digit);
+                rfidCode += digit;
             }
 
             //keine Ziffer -> Code zuruecksetzen
@@ -36,14 +40,14 @@ ws.on('open', function open() {
             }
         }
 
-        //RFID-Codelaenge = 10, wenn Enter kommt (Code 13)
-        else if (rawcode === 13) {
+        //RFID-Codelaenge = 10, wenn Enter kommt (Code 28)
+        else if (rawcode === 28) {
             console.log("enter: final code " + rfidCode);
 
             //Nur RFID-Codes an WSS, die in Config hinterlegt sind
-            if (rfidCode in configObj) {
+            if (rfidCode in cardConfig) {
                 console.log("code exists in config");
-                const cardData = configObj[rfidCode];
+                const cardData = cardConfig[rfidCode];
 
                 //Nachricht an WSS schicken
                 ws.send(JSON.stringify({
@@ -65,7 +69,4 @@ ws.on('open', function open() {
             rfidCode = "";
         }
     });
-
-    //Auf Tastatureingaben reagieren
-    ioHook.start();
 });
