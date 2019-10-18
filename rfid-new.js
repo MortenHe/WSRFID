@@ -21,15 +21,16 @@ ws.on('open', function open() {
 
     //Wenn eine Taste gedrueckt wird
     keyboard.on('keyup', (event) => {
-        const rawcode = event.rawcode;
+        const rawcode = event.code;
 
         //RFID-Codelaenge wurde noch nicht erreicht
         if (rfidCode.length < 10) {
 
-            //Wenn Code im Ziffernbereich (1-0 = 0-9) liegt -> Ziffer berechnen (Code 2 entspricht Ziffer 1) und RFID-Code verlaengern
-            if (rawcode >= 1 && rawcode <= 11) {
-                console.log("add digit to code");
-                rfidCode += (rawcode - 1);
+            //Wenn Code im Ziffernbereich (2-11 = 0-9) liegt -> Ziffer berechnen (Code 2 entspricht Ziffer 1) und RFID-Code verlaengern
+            if (rawcode >= 2 && rawcode <= 11) {
+                const digit = ((rawcode - 1) % 10)
+                console.log("add digit to code " + digit);
+                rfidCode += digit;
             }
 
             //keine Ziffer -> Code zuruecksetzen
