@@ -4,8 +4,8 @@ const ws = new WebSocket('ws://localhost:8080');
 
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
-const inputConfig = fs.readJsonSync('./input_config.json');
-const cardConfig = fs.readJsonSync('./card_config.json');
+const inputConfig = fs.readJsonSync(__dirname + '/input_config.json');
+const cardConfig = fs.readJsonSync(__dirname + '/card_config.json');
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
 const InputEvent = require('input-event');
