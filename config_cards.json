@@ -1,4 +1,12 @@
 {
+    "0003716715": {
+        "type": "activateApp",
+        "mode": "sh"
+    },
+    "0003870796": {
+        "type": "activateApp",
+        "mode": "audio"
+    },
     "0003912128": {
         "allowRandom": false,
         "mode": "hsp",

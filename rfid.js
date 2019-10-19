@@ -1,11 +1,17 @@
+//Port 8080 (audio player) oder 9090 (sh audio player)
+const port = process.argv[2] || 8080;
+
 //Mit WebsocketServer verbinden
 const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://localhost:' + port);
 
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
 const inputConfig = fs.readJsonSync(__dirname + '/config_input.json');
 const cardConfig = fs.readJsonSync(__dirname + '/config_cards.json');
+
+//HTTP Aufruf bei Wechsel zwischen audio und sh audio
+const http = require('http');
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
 const InputEvent = require('input-event');
@@ -49,11 +55,24 @@ ws.on('open', function open() {
                 console.log("code exists in config");
                 const cardData = cardConfig[rfidCode];
 
-                //Nachricht an WSS schicken
-                ws.send(JSON.stringify({
-                    type: "set-rfid-playlist",
-                    value: cardData
-                }));
+                //Welche Art von Befehl soll ausgefuhert werden?
+                const type = cardData.type || "set-rfid-playlist";
+
+                //Playlistwechsel
+                if (type === "set-rfid-playlist") {
+
+                    //Nachricht an WSS schicken
+                    ws.send(JSON.stringify({
+                        type: type,
+                        value: cardData
+                    }));
+                }
+
+                //Playerwechsel (audio vs. sh) per PHP Aufruf
+                else {
+                    console.log("change to app " + cardData.mode)
+                    http.get("http://localhost/php/activateApp.php?mode=" + cardData.mode);
+                }
             }
             else {
                 console.log("code is not in config");
