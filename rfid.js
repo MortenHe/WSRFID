@@ -1,4 +1,4 @@
-//Port 8080 (audio player) oder 9090 (sh audio player)
+//Port 8080 (audio player), 9090 (sh audio player), 7070 (soundquiz)
 const port = process.argv[2] || 8080;
 
 //Mit WebsocketServer verbinden
@@ -9,6 +9,16 @@ const ws = new WebSocket('ws://localhost:' + port);
 const fs = require('fs-extra');
 const inputConfig = fs.readJsonSync(__dirname + '/config_input.json');
 const cardConfig = fs.readJsonSync(__dirname + '/config_cards.json');
+
+//welches sind die Stanard-Kartenaktionen in dieser App (audio player -> playlist aendern)
+const defaultType = {
+    "7070": "send-card-data",
+    "8080": "set-rfid-playlist",
+    "9090": "set-audio-mode",
+};
+
+//Nur Umschaltkarten (audio -> sh audio) und Karten dieser App (ueber Port identifiziert) sollen ausgewertet werden
+cardConfigLocal = Object.assign(cardConfig["all"], cardConfig[port]);
 
 //HTTP Aufruf bei Wechsel zwischen audio und sh audio
 const http = require('http');
@@ -51,27 +61,25 @@ ws.on('open', function open() {
             console.log("enter: final code " + rfidCode);
 
             //Nur RFID-Codes an WSS, die in Config hinterlegt sind
-            if (rfidCode in cardConfig) {
+            if (rfidCode in cardConfigLocal) {
                 console.log("code exists in config");
-                const cardData = cardConfig[rfidCode];
+                const cardData = cardConfigLocal[rfidCode];
 
                 //Welche Art von Befehl soll ausgefuhert werden?
-                const type = cardData.type || "set-rfid-playlist";
+                const type = cardData.type || defaultType[port];
 
-                //Playlistwechsel
-                if (type === "set-rfid-playlist") {
+                //Playerwechsel (audio vs. sh vs. soundquiz) per PHP Aufruf
+                if (type === "activateApp") {
+                    console.log("change to app " + cardData.mode)
+                    http.get("http://localhost/php/activateApp.php?mode=" + cardData.mode);
+                }
 
-                    //Nachricht an WSS schicken
+                //Nachricht an WSS schicken
+                else {
                     ws.send(JSON.stringify({
                         type: type,
                         value: cardData
                     }));
-                }
-
-                //Playerwechsel (audio vs. sh) per PHP Aufruf
-                else {
-                    console.log("change to app " + cardData.mode)
-                    http.get("http://localhost/php/activateApp.php?mode=" + cardData.mode);
                 }
             }
             else {

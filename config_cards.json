@@ -1,22 +1,41 @@
 {
-    "0003716715": {
-        "type": "activateApp",
-        "mode": "sh"
+    "all": {
+        "0003716715": {
+            "type": "activateApp",
+            "mode": "sh"
+        },
+        "0003870796": {
+            "type": "activateApp",
+            "mode": "audio"
+        },
+        "1234567890": {
+            "type": "activateApp",
+            "mode": "soundquiz"
+        }
     },
-    "0003870796": {
-        "type": "activateApp",
-        "mode": "audio"
+    "8080": {
+        "0003912128": {
+            "allowRandom": false,
+            "mode": "hsp",
+            "name": "Janosch - Hallo Schiff Pyjamahose",
+            "path": "janosch/schiff-pyjamahose"
+        },
+        "0003908652": {
+            "allowRandom": true,
+            "mode": "kindermusik",
+            "name": "Eule findet den Beat auf Europatour",
+            "path": "misc/eule-europa"
+        }
     },
-    "0003912128": {
-        "allowRandom": false,
-        "mode": "hsp",
-        "name": "Janosch - Hallo Schiff Pyjamahose",
-        "path": "janosch/schiff-pyjamahose"
-    },
-    "0003908652": {
-        "allowRandom": true,
-        "mode": "kindermusik",
-        "name": "Eule findet den Beat auf Europatour",
-        "path": "misc/eule-europa"
+    "9090": {
+        "1231231231": {
+            "mode": "sh"
+        },
+        "1231231232": {
+            "mode": "mh"
+        },
+        "1231231233": {
+            "mode": "kids"
+        }
     }
 }
