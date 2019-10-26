@@ -25,10 +25,23 @@
             "mode": "kindermusik",
             "name": "Eule findet den Beat auf Europatour",
             "path": "misc/eule-europa"
+        },
+        "0007959183": {
+            "allowRandom": false,
+            "mode": "hsp",
+            "name": "Janosch - Emil Grünbär und seine Bande",
+            "path": "janosch/emil-gruenbaer"
+        },
+        "0007969277": {
+            "allowRandom": true,
+            "mode": "cds",
+            "name": "Katie Melua - Ketevan",
+            "path": "misc/katie-melua-ketevan"
         }
+        
     },
     "9090": {
-        "1231231231": "sh",
+        "0003841245": "sh",
         "1231231232": "mh",
         "1231231233": "kids"
     },
