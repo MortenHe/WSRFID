@@ -18,7 +18,6 @@
   "homepage": "https://github.com/MortenHe/WSRFID#readme",
   "dependencies": {
     "fs-extra": "^8.1.0",
-    "glob": "^7.1.5",
     "input-event": "^1.2.6",
     "jsonpath-plus": "^1.1.0",
     "ws": "^7.1.2"

@@ -120,10 +120,19 @@ ws.on('open', function open() {
 
                         //Karte kommt vom Soundquiz -> Soundquiz-Server starten
                         case 7070:
-                            http.get("http://localhost/php/activateApp.php?mode=soundquiz");
+
+                            //Wenn es eine game-select Karte ist, gleich dieses Spiel starten
+                            let suffix = "";
+                            if (cardData.type === "game-select") {
+                                suffix = "&gameSelect=" + cardData.value;
+                            }
+
+                            //Soundquiz-Server starten
+                            http.get("http://localhost/php/activateApp.php?mode=soundquiz" + suffix);
                             break;
 
-                        //Karte kommt aus Audioplayer -> lastSession.json schreiben und Audio Player starten (dieser laedt lastSession beim Start)
+                        //Karte kommt aus Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start)
+
                         case 8080:
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
                                 path: audioDir + "/" + cardData.mode + "/" + cardData.path,
@@ -137,7 +146,7 @@ ws.on('open', function open() {
 
                         //Karte kommt von SH Player -> SH Player in passendem Modus starten (kids vs. sh)
                         case 9090:
-                            http.get("http://localhost/php/activateApp.php?mode=sh&audioMode=" + cardData.value);
+                            http.get("http://localhost/php/activateApp.php?mode=sh&audioMode=" + cardData.audioMode);
                             break;
                     }
                 }
@@ -145,21 +154,9 @@ ws.on('open', function open() {
                 //Fuer diese Karte laueft bereits der richtige Player -> Nachricht an WSS schicken
                 else {
                     console.log(defaultType[port] + " " + JSON.stringify(cardData));
-                    console.log("port is " + cardDataPort);
-
-
-                    let sendValue = (cardDataPort != "7070") ? cardData : JSON.stringify(cardData)
-
-                    if (cardDataPort === 9090) {
-                        sendValue = cardData.value
-                    }
-
-                    console.log(sendValue)
-
-
                     ws.send(JSON.stringify({
                         type: defaultType[port],
-                        value: sendValue
+                        value: cardData
                     }));
                 }
             }

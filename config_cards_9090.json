@@ -1,11 +1,11 @@
 {
     "0003841245": {
-        "value": "sh"
+        "audioMode": "sh"
     },
     "1234321": {
-        "value": "mh"
+        "audioMode": "mh"
     },
     "0003716715": {
-        "value": "kids"
+        "audioMode": "kids"
     }
 }
