@@ -8,6 +8,7 @@ const ws = new WebSocket('ws://localhost:' + port);
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
 const { JSONPath } = require('jsonpath-plus');
+const glob = require('glob');
 
 //HTTP Aufruf bei Wechsel zwischen audio und sh audio
 const http = require('http');
@@ -39,8 +40,8 @@ for (let key in cardConfig9090) {
     cards[key]["port"] = 9090;
 };
 
-//Audio Player Karten aus JSON-Config des Player Clients ermitteln, ueber alle JSON-Files gehen
-const audiolist = fs.readJSONSync("/var/www/html/wap/assets/json/pw/audiolist.json");
+//Audio Player Karten aus JSON-Config des Player Clients ermitteln, dazu ueber alle JSON-Files gehen
+const audiolist = fs.readJSONSync(glob.sync("/var/www/html/wap/assets/json/*/audiolist.json")[0]);
 for (const [mode, data] of Object.entries(audiolist)) {
     for (const file of data.filter.filters) {
 
@@ -48,7 +49,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
         if (file.id !== "all") {
 
             //JSON-Datei laden (janosch.json)
-            const filePath = "/var/www/html/wap/assets/json/pw/" + mode + "/" + file.id + ".json";
+            const filePath = glob.sync("/var/www/html/wap/assets/json/*/" + mode + "/" + file.id + ".json")[0];
             const json = fs.readJSONSync(filePath);
 
             //mit JSONPath alle Eintraege finden, die einen RFID-Wert gesetzt haben
