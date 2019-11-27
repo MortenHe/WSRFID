@@ -1,238 +1,238 @@
 {
-    "e020395d": {
+    "0003908652": {
         "type": "game-select",
         "value": "sounds"
     },
-    "0008011646": {
+    "todo9": {
         "type": "game-select",
         "value": "people"
     },
-    "10a0405d": {
+    "todo33": {
         "type": "joker",
         "value": ""
     },
-    "40eb047d": {
+    "todo44": {
         "type": "repeat",
         "value": ""
     },
-    "044fd8e2905b80": {
+    "0005406089": {
         "type": "answer",
         "value": "car",
         "games": [
             "sounds"
         ]
     },
-    "60eb3f5d": {
+    "0008011602": {
         "type": "answer",
         "value": "cat",
         "games": [
             "sounds"
         ]
     },
-    "30a816a4": {
+    "0007970951": {
         "type": "answer",
         "value": "dog",
         "games": [
             "sounds"
         ]
     },
-    "80cbd45c": {
+    "0005443541": {
         "type": "answer",
         "value": "horse",
         "games": [
             "sounds"
         ]
     },
-    "0441d7e2905b80": {
+    "0005425681": {
         "type": "answer",
         "value": "cow",
         "games": [
             "sounds"
         ]
     },
-    "203ec8a5": {
+    "0005434221": {
         "type": "answer",
         "value": "donkey",
         "games": [
             "sounds"
         ]
     },
-    "50ffa1a7": {
+    "0007926718": {
         "type": "answer",
         "value": "duck",
         "games": [
             "sounds"
         ]
     },
-    "0442b2e2": {
+    "0002516128": {
         "type": "answer",
         "value": "sheep",
         "games": [
             "sounds"
         ]
     },
-    "10253c5d": {
+    "0007998558": {
         "type": "answer",
         "value": "frog",
         "games": [
             "sounds"
         ]
     },
-    "222": {
+    "0002469956": {
         "type": "answer",
         "value": "chicken",
         "games": [
             "sounds"
         ]
     },
-    "333": {
+    "0010093809": {
         "type": "answer",
         "value": "pig",
         "games": [
             "sounds"
         ]
     },
-    "444": {
+    "0005452904": {
         "type": "answer",
         "value": "elephant",
         "games": [
             "sounds"
         ]
     },
-    "5555": {
+    "0007955207": {
         "type": "answer",
         "value": "lion",
         "games": [
             "sounds"
         ]
     },
-    "6666": {
+    "0007951448": {
         "type": "answer",
         "value": "bird",
         "games": [
             "sounds"
         ]
     },
-    "8888": {
+    "0007955270": {
         "type": "answer",
         "value": "monkey",
         "games": [
             "sounds"
         ]
     },
-    "0455d8e2905b80": {
+    "0005404931": {
         "type": "answer",
         "value": "tractor",
         "games": [
             "sounds"
         ]
     },
-    "045bd8e2905b80": {
+    "0005459611": {
         "type": "answer",
         "value": "bell",
         "games": [
             "sounds"
         ]
     },
-    "999999": {
+    "0007969277": {
         "type": "answer",
         "value": "train",
         "games": [
             "sounds"
         ]
     },
-    "0464d9e2905b80": {
+    "0005067104": {
         "type": "answer",
         "value": "mower",
         "games": [
             "sounds"
         ]
     },
-    "99999999": {
+    "0005108375": {
         "type": "answer",
         "value": "hammer",
         "games": [
             "sounds"
         ]
     },
-    "999999999": {
+    "0005472993": {
         "type": "answer",
         "value": "rooster",
         "games": [
             "sounds"
         ]
     },
-    "9999999999": {
+    "0008011646": {
         "type": "answer",
         "value": "wolf",
         "games": [
             "sounds"
         ]
     },
-    "043cd7e2905b80": {
+    "0005467271": {
         "type": "answer",
         "value": "crow",
         "games": [
             "sounds"
         ]
     },
-    "999999999999": {
+    "0005092572": {
         "type": "answer",
         "value": "toothbrush",
         "games": [
             "sounds"
         ]
     },
-    "0007955207": {
+    "todo": {
         "type": "answer",
         "value": "steffi",
         "games": [
             "people"
         ]
     },
-    "0007951448": {
+    "todo8": {
         "type": "answer",
         "value": "martin",
         "games": [
             "people"
         ]
     },
-    "0007955270": {
+    "todo7": {
         "type": "answer",
         "value": "luis",
         "games": [
             "people"
         ]
     },
-    "0007970951": {
+    "todo2": {
         "type": "answer",
         "value": "laila",
         "games": [
             "people"
         ]
     },
-    "0008011602": {
+    "todo5": {
         "type": "answer",
         "value": "barbara",
         "games": [
             "people"
         ]
     },
-    "0007998558": {
+    "todo3": {
         "type": "answer",
         "value": "hwh",
         "games": [
             "people"
         ]
     },
-    "0007926718": {
+    "todo4": {
         "type": "answer",
         "value": "traude",
         "games": [
             "people"
         ]
     },
-    "0003870796": {
+    "todo21": {
         "type": "answer",
         "value": "rolf",
         "games": [
