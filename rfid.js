@@ -122,10 +122,19 @@ ws.on('open', function open() {
                         //Karte kommt vom Soundquiz -> Soundquiz-Server starten
                         case 7070:
 
-                            //Wenn es eine game-select Karte ist, gleich dieses Spiel starten
+                            //wenn moeglich schon direkt ein Spiel starten
                             let suffix = "";
-                            if (cardData.type === "game-select") {
-                                suffix = "&gameSelect=" + cardData.value;
+                            switch (cardData.type) {
+
+                                //Bei Game-Select Karte -> dieses Spiel starten
+                                case "game-select":
+                                    suffix = "&gameSelect=" + cardData.value;
+                                    break;
+
+                                //Bei Antwortkarte -> 1. hinterlegtes Spiel dieser Karte starten
+                                case "answer":
+                                    suffix = "&gameSelect=" + cardData.games[0];
+                                    break;
                             }
 
                             //Soundquiz-Server starten
