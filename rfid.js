@@ -138,7 +138,7 @@ ws.on('open', function open() {
                             }
 
                             //Soundquiz-Server starten
-                            http.get("http://localhost/php/activateApp.php?mode=soundquiz" + suffix);
+                            http.get("http://localhost/php/activateAudioApp.php?mode=soundquiz" + suffix);
                             break;
 
                         //Karte kommt aus Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start)
@@ -151,12 +151,12 @@ ws.on('open', function open() {
                                 allowRandom: cardData.allowRandom,
                                 position: 0
                             });
-                            http.get("http://localhost/php/activateApp.php?mode=audio");
+                            http.get("http://localhost/php/activateAudioApp.php?mode=audio");
                             break;
 
                         //Karte kommt von SH Player -> SH Player in passendem Modus starten (kids vs. sh)
                         case 9090:
-                            http.get("http://localhost/php/activateApp.php?mode=sh&audioMode=" + cardData.audioMode);
+                            http.get("http://localhost/php/activateAudioApp.php?mode=sh&audioMode=" + cardData.audioMode);
                             break;
                     }
                 }
