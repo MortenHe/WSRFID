@@ -18,6 +18,7 @@
     "0005406089": {
         "type": "answer",
         "value": "car",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -25,6 +26,7 @@
     "0008011602": {
         "type": "answer",
         "value": "cat",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -32,6 +34,7 @@
     "0007970951": {
         "type": "answer",
         "value": "dog",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -39,6 +42,7 @@
     "0005443541": {
         "type": "answer",
         "value": "horse",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -46,6 +50,7 @@
     "0005425681": {
         "type": "answer",
         "value": "cow",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -53,6 +58,7 @@
     "0005434221": {
         "type": "answer",
         "value": "donkey",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -60,6 +66,7 @@
     "0007926718": {
         "type": "answer",
         "value": "duck",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -67,6 +74,7 @@
     "0002516128": {
         "type": "answer",
         "value": "sheep",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -74,6 +82,7 @@
     "0007998558": {
         "type": "answer",
         "value": "frog",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -81,6 +90,7 @@
     "0002469956": {
         "type": "answer",
         "value": "chicken",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -88,6 +98,7 @@
     "0010093809": {
         "type": "answer",
         "value": "pig",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -95,6 +106,7 @@
     "0005452904": {
         "type": "answer",
         "value": "elephant",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -102,6 +114,7 @@
     "0007955207": {
         "type": "answer",
         "value": "lion",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -109,6 +122,7 @@
     "0007951448": {
         "type": "answer",
         "value": "bird",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -116,6 +130,7 @@
     "0007955270": {
         "type": "answer",
         "value": "monkey",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -123,6 +138,7 @@
     "0005404931": {
         "type": "answer",
         "value": "tractor",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -130,6 +146,7 @@
     "0005459611": {
         "type": "answer",
         "value": "bell",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -137,6 +154,7 @@
     "0007969277": {
         "type": "answer",
         "value": "train",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -144,6 +162,7 @@
     "0005067104": {
         "type": "answer",
         "value": "mower",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -151,6 +170,7 @@
     "0005108375": {
         "type": "answer",
         "value": "hammer",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -158,6 +178,7 @@
     "0005472993": {
         "type": "answer",
         "value": "rooster",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -165,6 +186,7 @@
     "0008011646": {
         "type": "answer",
         "value": "wolf",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -172,6 +194,7 @@
     "0005467271": {
         "type": "answer",
         "value": "crow",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -179,6 +202,7 @@
     "0005092572": {
         "type": "answer",
         "value": "toothbrush",
+        "active": true,
         "games": [
             "sounds"
         ]
@@ -186,6 +210,7 @@
     "0000145773": {
         "type": "answer",
         "value": "steffi",
+        "active": true,
         "games": [
             "people"
         ]
@@ -193,6 +218,7 @@
     "0000869169": {
         "type": "answer",
         "value": "martin",
+        "active": true,
         "games": [
             "people"
         ]
@@ -200,6 +226,7 @@
     "0000105055": {
         "type": "answer",
         "value": "luis",
+        "active": true,
         "games": [
             "people"
         ]
@@ -207,6 +234,7 @@
     "0000173755": {
         "type": "answer",
         "value": "laila",
+        "active": true,
         "games": [
             "people"
         ]
@@ -214,6 +242,7 @@
     "0007565785": {
         "type": "answer",
         "value": "barbara",
+        "active": true,
         "games": [
             "people"
         ]
@@ -221,6 +250,7 @@
     "0000102235": {
         "type": "answer",
         "value": "hwh",
+        "active": true,
         "games": [
             "people"
         ]
@@ -228,6 +258,7 @@
     "0007565610": {
         "type": "answer",
         "value": "traude",
+        "active": true,
         "games": [
             "people"
         ]
@@ -235,6 +266,7 @@
     "0000132191": {
         "type": "answer",
         "value": "rolf",
+        "active": true,
         "games": [
             "people"
         ]
@@ -242,6 +274,7 @@
     "0000137208": {
         "type": "answer",
         "value": "hettie",
+        "active": true,
         "games": [
             "people"
         ]
@@ -249,6 +282,7 @@
     "0000925296": {
         "type": "answer",
         "value": "jonathan",
+        "active": true,
         "games": [
             "people"
         ]
@@ -256,6 +290,7 @@
     "0003258437": {
         "type": "answer",
         "value": "marcus",
+        "active": true,
         "games": [
             "people"
         ]
@@ -263,6 +298,7 @@
     "0000172556": {
         "type": "answer",
         "value": "nade",
+        "active": true,
         "games": [
             "people"
         ]
@@ -270,6 +306,7 @@
     "0011775158": {
         "type": "answer",
         "value": "silvi",
+        "active": true,
         "games": [
             "people"
         ]
@@ -277,6 +314,7 @@
     "0011793830": {
         "type": "answer",
         "value": "bob",
+        "active": true,
         "games": [
             "people"
         ]
@@ -284,6 +322,7 @@
     "0011784543": {
         "type": "answer",
         "value": "mixi",
+        "active": true,
         "games": [
             "people"
         ]
@@ -291,6 +330,7 @@
     "0000132823": {
         "type": "answer",
         "value": "anna",
+        "active": true,
         "games": [
             "people"
         ]
@@ -298,6 +338,7 @@
     "0003918426": {
         "type": "answer",
         "value": "dan",
+        "active": true,
         "games": [
             "people"
         ]
@@ -305,6 +346,47 @@
     "0003919328": {
         "type": "answer",
         "value": "tobias",
+        "active": true,
+        "games": [
+            "people"
+        ]
+    },
+    "0011806621": {
+        "type": "answer",
+        "value": "heppo",
+        "active": true,
+        "games": [
+            "people"
+        ]
+    },
+    "0011874812": {
+        "type": "answer",
+        "value": "buddel",
+        "active": true,
+        "games": [
+            "people"
+        ]
+    },
+    "0011824999": {
+        "type": "answer",
+        "value": "rollo",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "0011802023": {
+        "type": "answer",
+        "value": "wendy",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "0000868549": {
+        "type": "answer",
+        "value": "baggi",
+        "active": false,
         "games": [
             "people"
         ]
