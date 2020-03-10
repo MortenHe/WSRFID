@@ -119,12 +119,20 @@ ws.on('open', function open() {
                     console.log("switch to player " + cardDataPort)
                     switch (cardDataPort) {
 
-                        //Karte kommt vom Soundquiz -> Soundquiz-Server starten
+                        //Karte kommt vom Soundquiz -> Soundquiz-Server oder -Player starten
                         case 7070:
 
                             //wenn moeglich schon direkt ein Spiel starten
                             let suffix = "";
+
+                            //Soundquiz-Server oder Player starten?
+                            let soundquizType = "soundquiz";
                             switch (cardData.type) {
+
+                                //Soundquiz-Player starten
+                                case "start-server-player":
+                                    soundquizType = "soundquizplayer";
+                                    break;
 
                                 //Bei Game-Select Karte -> dieses Spiel starten
                                 case "game-select":
@@ -137,12 +145,22 @@ ws.on('open', function open() {
                                     break;
                             }
 
-                            //Soundquiz-Server starten
-                            http.get("http://localhost/php/activateAudioApp.php?mode=soundquiz" + suffix);
+                            //Soundquiz oder Soundquiz-Player starten
+                            switch (soundquizType) {
+
+                                //Soundquiz-Server starten
+                                case "soundquiz":
+                                    http.get("http://localhost/php/activateAudioApp.php?mode=soundquiz" + suffix);
+                                    break;
+
+                                //Soundquiz-Player starten
+                                case "soundquiz-player":
+                                    http.get("http://localhost/php/activateAudioApp.php?mode=soundquizplayer");
+                                    break;
+                            }
                             break;
 
                         //Karte kommt aus Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start)
-
                         case 8080:
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
                                 path: audioDir + "/" + cardData.mode + "/" + cardData.path,

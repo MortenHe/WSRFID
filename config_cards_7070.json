@@ -7,12 +7,8 @@
         "type": "game-select",
         "value": "people"
     },
-    "todo33": {
-        "type": "joker",
-        "value": ""
-    },
-    "todo44": {
-        "type": "repeat",
+    "todo99": {
+        "type": "start-server-player",
         "value": ""
     },
     "0005406089": {
@@ -386,6 +382,54 @@
     "0000868549": {
         "type": "answer",
         "value": "baggi",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo": {
+        "type": "answer",
+        "value": "knolle",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo2": {
+        "type": "answer",
+        "value": "alex",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo3": {
+        "type": "answer",
+        "value": "bibi",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo4": {
+        "type": "answer",
+        "value": "sams",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo5": {
+        "type": "answer",
+        "value": "taschenbier",
+        "active": false,
+        "games": [
+            "people"
+        ]
+    },
+    "todo6": {
+        "type": "answer",
+        "value": "tina",
         "active": false,
         "games": [
             "people"
