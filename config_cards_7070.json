@@ -374,7 +374,7 @@
     "0011802023": {
         "type": "answer",
         "value": "wendy",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
