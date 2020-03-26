@@ -398,7 +398,7 @@
     "0011820099": {
         "type": "answer",
         "value": "alex",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
@@ -406,7 +406,7 @@
     "0011807921": {
         "type": "answer",
         "value": "bibi",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
@@ -414,7 +414,7 @@
     "0011883649": {
         "type": "answer",
         "value": "sams",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
@@ -422,7 +422,7 @@
     "0011858751": {
         "type": "answer",
         "value": "taschenbier",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
@@ -430,7 +430,7 @@
     "0011861809": {
         "type": "answer",
         "value": "tina",
-        "active": false,
+        "active": true,
         "games": [
             "people"
         ]
