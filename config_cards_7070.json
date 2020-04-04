@@ -434,5 +434,17 @@
         "games": [
             "people"
         ]
+    },
+    "0011830076": {
+        "type": "answer",
+        "value": [
+            "1+3",
+            "2+2",
+            "3+1"
+        ],
+        "active": true,
+        "games": [
+            "numbers"
+        ]
     }
 }
