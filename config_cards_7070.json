@@ -7,7 +7,11 @@
         "type": "game-select",
         "value": "people"
     },
-    "todo99": {
+    "0011936652": {
+        "type": "game-select",
+        "value": "numbers"
+    },
+    "0011808504": {
         "type": "start-server-player",
         "value": ""
     },
@@ -387,10 +391,26 @@
             "people"
         ]
     },
-    "todo": {
+    "0011808546": {
         "type": "answer",
         "value": "knolle",
-        "active": false,
+        "active": true,
+        "games": [
+            "people"
+        ]
+    },
+    "0011839407": {
+        "type": "answer",
+        "value": "rumpel",
+        "active": true,
+        "games": [
+            "people"
+        ]
+    },
+    "0011856423": {
+        "type": "answer",
+        "value": "sprinti",
+        "active": true,
         "games": [
             "people"
         ]
