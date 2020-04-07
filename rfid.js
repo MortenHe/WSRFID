@@ -154,7 +154,7 @@ ws.on('open', function open() {
                                     break;
 
                                 //Soundquiz-Player starten
-                                case "soundquiz-player":
+                                case "soundquizplayer":
                                     http.get("http://localhost/php/activateAudioApp.php?mode=soundquizplayer");
                                     break;
                             }
@@ -179,13 +179,33 @@ ws.on('open', function open() {
                     }
                 }
 
-                //Fuer diese Karte laueft bereits der richtige Player -> Nachricht an WSS schicken
+                //Fuer diese Karte laueft bereits der richtige Player (=Port)
                 else {
-                    console.log(defaultType[port] + " " + JSON.stringify(cardData));
-                    ws.send(JSON.stringify({
-                        type: defaultType[port],
-                        value: cardData
-                    }));
+
+                    //Wechsel zwischen Soundquiz und Soundquiz Player ermoeglichen
+                    //Wenn wir bereits im Soundquiz oder Soundquiz Player sind und eine weitere Soundquiz / Sounduizplayerkarte kommt - aber keine Antwortkarte
+                    if (cardDataPort === 7070 && cardData.type !== "answer") {
+
+                        //Den Serverplayer starten
+                        if (cardData.type === "start-server-player") {
+                            http.get("http://localhost/php/activateAudioApp.php?mode=soundquizplayer");
+                        }
+
+                        //Das Soundquiz im gewuneschten Modus starten
+                        else if (cardData.type === "game-select") {
+                            console.log("goto quiz " + cardData.value)
+                            http.get("http://localhost/php/activateAudioApp.php?mode=soundquiz&gameSelect=" + cardData.value);
+                        }
+                    }
+
+                    //Karte kommt tatsaechlich aus dem gleichen Player -> Nachricht an WSS schicken
+                    else {
+                        console.log(defaultType[port] + " " + JSON.stringify(cardData));
+                        ws.send(JSON.stringify({
+                            type: defaultType[port],
+                            value: cardData
+                        }));
+                    }
                 }
             }
             else {
