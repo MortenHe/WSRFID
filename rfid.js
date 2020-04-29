@@ -14,15 +14,15 @@ const glob = require('glob');
 const http = require('http');
 
 //Configs
-const inputConfig = fs.readJsonSync(__dirname + '/config_input.json');
-const cardConfig7070 = fs.readJsonSync(__dirname + '/config_cards_7070.json');
-const cardConfig9090 = fs.readJsonSync(__dirname + '/config_cards_9090.json');
-const configFile = fs.readJsonSync(__dirname + '/../AudioServer/config.json');
-const audioDir = configFile["audioDir"];
+const config = fs.readJsonSync(__dirname + '/config.json');
+const cardConfig7070 = fs.readJsonSync(config["soundquizDir"] + "/soundquiz_rfid.json");
+const cardConfig9090 = fs.readJsonSync(config["shpDir"] + "/shp_rfid.json");
+const audioConfigFile = fs.readJsonSync(config["audioDir"] + "/config.json");
+const audioDir = audioConfigFile["audioDir"];
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
 const InputEvent = require('input-event');
-const input = new InputEvent(inputConfig.input);
+const input = new InputEvent(config.input);
 const keyboard = new InputEvent.Keyboard(input);
 
 //Karten der Player sammeln
@@ -41,7 +41,7 @@ for (let key in cardConfig9090) {
 };
 
 //Audio Player Karten aus JSON-Config des Player Clients ermitteln, dazu ueber alle JSON-Files gehen
-const audiolist = fs.readJSONSync(glob.sync("/var/www/html/wap/assets/json/*/audiolist.json")[0]);
+const audiolist = fs.readJSONSync(config["jsonDir"] + "/audiolist.json");
 for (const [mode, data] of Object.entries(audiolist)) {
     for (const file of data.filter.filters) {
 
@@ -49,7 +49,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
         if (file.id !== "all") {
 
             //JSON-Datei laden (janosch.json)
-            const filePath = glob.sync("/var/www/html/wap/assets/json/*/" + mode + "/" + file.id + ".json")[0];
+            const filePath = config["jsonDir"] + "/" + mode + "/" + file.id + ".json";
             const json = fs.readJSONSync(filePath);
 
             //mit JSONPath alle Eintraege finden, die einen RFID-Wert gesetzt haben

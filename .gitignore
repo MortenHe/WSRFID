@@ -1,4 +1,4 @@
 node_modules
 input_config.json
-/config_input.json
+/config.json
 test.js
