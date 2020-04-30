@@ -1,6 +1,6 @@
 {
     "input": "/dev/input/event1",
-    "audioDir": "/media/usb_audio/Nextcloud/audio/wap",
+    "audioServerDir": "/home/pi/mh_prog/AudioServer",
     "shpDir": "/media/usb_audio/Nextcloud/audio/shp",
     "soundquizDir": "/media/usb_audio/Nextcloud/audio/soundquiz",
     "jsonDir": "/media/usb_audio/Nextcloud/audio/wap/json/pw"

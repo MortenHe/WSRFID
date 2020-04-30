@@ -17,7 +17,7 @@ const http = require('http');
 const config = fs.readJsonSync(__dirname + '/config.json');
 const cardConfig7070 = fs.readJsonSync(config["soundquizDir"] + "/soundquiz_rfid.json");
 const cardConfig9090 = fs.readJsonSync(config["shpDir"] + "/shp_rfid.json");
-const audioConfigFile = fs.readJsonSync(config["audioDir"] + "/config.json");
+const audioConfigFile = fs.readJsonSync(config["audioServerDir"] + "/config.json");
 const audioDir = audioConfigFile["audioDir"];
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
