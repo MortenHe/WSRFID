@@ -1,7 +1,7 @@
 {
   "name": "wsrfid",
   "version": "1.0.0",
-  "description": "",
+  "description": "rfid for player",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/MortenHe/WSRFID#readme",
   "dependencies": {
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "input-event": "^1.2.6",
-    "jsonpath-plus": "^1.1.0",
-    "ws": "^7.1.2"
+    "jsonpath-plus": "^4.0.0",
+    "ws": "^7.3.1"
   }
 }
