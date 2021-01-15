@@ -20,7 +20,7 @@
     "fs-extra": "^9.0.1",
     "glob": "^7.1.6",
     "input-event": "^1.2.6",
-    "jsonpath-plus": "^4.0.0",
-    "ws": "^7.3.1"
+    "jsonpath-plus": "^5.0.2",
+    "ws": "^7.4.2"
   }
 }
