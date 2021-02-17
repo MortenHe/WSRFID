@@ -11,7 +11,6 @@ const singleSoundPlayer = require('play-sound')(opts = {});
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
 const { JSONPath } = require('jsonpath-plus');
-const glob = require('glob');
 
 //HTTP Aufruf bei Wechsel zwischen audio und sh audio
 const http = require('http');
