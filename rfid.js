@@ -5,6 +5,9 @@ const port = parseInt(process.argv[2]) || 8080;
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:' + port);
 
+//Beep-Ton bei Buttons
+const singleSoundPlayer = require('play-sound')(opts = {});
+
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
 const { JSONPath } = require('jsonpath-plus');
@@ -107,6 +110,9 @@ ws.on('open', function open() {
         //RFID-Codelaenge = 10, wenn Enter kommt (Code 28)
         else if (rawcode === 28) {
             console.log("enter: final code " + rfidCode);
+
+            //Bestaetigungston abspielen
+            playSound();
 
             //Nur RFID-Codes bearbeiten, die in Config hinterlegt sind
             if (rfidCode in cards) {
@@ -223,3 +229,9 @@ ws.on('open', function open() {
         }
     });
 });
+
+//Einzelsound abspielen
+function playSound(sound) {
+    const playedSound = sound ?? "beep.wav";
+    singleSoundPlayer.play(__dirname + "/" + playedSound);
+}
