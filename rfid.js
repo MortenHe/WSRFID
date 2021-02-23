@@ -1,5 +1,5 @@
 //Port 8080 (audio player), 9090 (sh audio player), 7070 (soundquiz)
-const port = parseInt(process.argv[2]) || 8080;
+const port = parseInt(process.argv[2]);
 
 //Mit WebsocketServer verbinden
 const WebSocket = require('ws');
@@ -16,15 +16,16 @@ const { JSONPath } = require('jsonpath-plus');
 const http = require('http');
 
 //Configs
-const config = fs.readJsonSync(__dirname + '/config.json');
-const cardConfig7070 = fs.readJsonSync(config["soundquizDir"] + "/soundquiz_rfid.json");
-const cardConfig9090 = fs.readJsonSync(config["shpDir"] + "/shp_rfid.json");
-const audioConfigFile = fs.readJsonSync(config["audioServerDir"] + "/config.json");
-const audioDir = audioConfigFile["audioDir"];
+const audioConfigFile = fs.readJsonSync(__dirname + "/../AudioServer/config.json");
+const nextcloudDir = audioConfigFile.nextcloudDir;
+const audioDir = nextcloudDir + "/audio/wap/mp3";;
+const jsonDir = nextcloudDir + "/audio/wap/json/pw";
+const cardConfig7070 = fs.readJsonSync(nextcloudDir + "/audio/soundquiz/soundquiz_rfid.json");
+const cardConfig9090 = fs.readJsonSync(nextcloudDir + "/audio/shp/shp_rfid.json");
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
 const InputEvent = require('input-event');
-const input = new InputEvent(config.input);
+const input = new InputEvent(fs.readJsonSync(__dirname + '/config.json').input);
 const keyboard = new InputEvent.Keyboard(input);
 
 //Karten der Player sammeln
@@ -43,7 +44,7 @@ for (let key in cardConfig9090) {
 };
 
 //Audio Player Karten aus JSON-Config des Player Clients ermitteln, dazu ueber alle JSON-Files gehen
-const audiolist = fs.readJSONSync(config["jsonDir"] + "/audiolist.json");
+const audiolist = fs.readJSONSync(jsonDir + "/audiolist.json");
 for (const [mode, data] of Object.entries(audiolist)) {
     for (const file of data.filter.filters) {
 
@@ -51,7 +52,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
         if (file.id !== "all") {
 
             //JSON-Datei laden (janosch.json)
-            const filePath = config["jsonDir"] + "/" + mode + "/" + file.id + ".json";
+            const filePath = jsonDir + "/" + mode + "/" + file.id + ".json";
             const json = fs.readJSONSync(filePath);
 
             //mit JSONPath alle Eintraege finden, die einen RFID-Wert gesetzt haben

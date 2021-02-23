@@ -1,7 +1,3 @@
 {
-    "input": "/dev/input/event1",
-    "audioServerDir": "/home/pi/mh_prog/AudioServer",
-    "shpDir": "/home/pi/Nextcloud/audio/shp",
-    "soundquizDir": "/home/pi/Nextcloud/audio/soundquiz",
-    "jsonDir": "/home/pi/Nextcloud/audio/wap/json/pw"
+    "input": "/dev/input/event1"
 }
