@@ -16,16 +16,16 @@ const { JSONPath } = require('jsonpath-plus');
 const http = require('http');
 
 //Configs
-const audioConfigFile = fs.readJsonSync(__dirname + "/../AudioServer/config.json");
-const nextcloudDir = audioConfigFile.nextcloudDir;
-const audioDir = nextcloudDir + "/audio/wap/mp3";;
-const jsonDir = nextcloudDir + "/audio/wap/json/pw";
-const cardConfig7070 = fs.readJsonSync(nextcloudDir + "/audio/soundquiz/soundquiz_rfid.json");
-const cardConfig9090 = fs.readJsonSync(nextcloudDir + "/audio/shp/shp_rfid.json");
+const configFile = fs.readJsonSync(__dirname + "/../AudioServer/config.json");
+const audioDir = configFile.audioDir;
+const audioFilesDir = audioDir + "/wap/mp3";;
+const jsonDir = audioDir + "/wap/json/pw";
+const cardConfig7070 = fs.readJsonSync(audioDir + "/soundquiz/soundquiz_rfid.json");
+const cardConfig9090 = fs.readJsonSync(audioDir + "/shp/shp_rfid.json");
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
 const InputEvent = require('input-event');
-const input = new InputEvent(fs.readJsonSync(__dirname + '/config.json').input);
+const input = new InputEvent(configFile.USBRFIDReaderInput);
 const keyboard = new InputEvent.Keyboard(input);
 
 //Karten der Player sammeln
@@ -169,7 +169,7 @@ ws.on('open', function open() {
                         //Karte kommt aus Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start)
                         case 8080:
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
-                                path: audioDir + "/" + cardData.mode + "/" + cardData.path,
+                                path: audioFilesDir + "/" + cardData.mode + "/" + cardData.path,
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
                                 allowRandom: cardData.allowRandom,
