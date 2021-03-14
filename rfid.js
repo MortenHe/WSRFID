@@ -232,6 +232,6 @@ ws.on('open', function open() {
 
 //Einzelsound abspielen
 function playSound(sound) {
-    const playedSound = sound ?? "beep.wav";
+    const playedSound = sound ?? "rfid.wav";
     singleSoundPlayer.play({ path: __dirname + "/" + playedSound });
 }
