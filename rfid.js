@@ -5,8 +5,8 @@ const port = parseInt(process.argv[2]);
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:' + port);
 
-//Beep-Ton bei Buttons
-const singleSoundPlayer = require('play-sound')(opts = {});
+//Beep-Ton bei RFID
+const singleSoundPlayer = require('node-wav-player');
 
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
@@ -233,5 +233,5 @@ ws.on('open', function open() {
 //Einzelsound abspielen
 function playSound(sound) {
     const playedSound = sound ?? "beep.wav";
-    singleSoundPlayer.play(__dirname + "/" + playedSound);
+    singleSoundPlayer.play({ path: __dirname + "/" + playedSound });
 }
