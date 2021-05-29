@@ -21,6 +21,6 @@
     "input-event": "^1.2.6",
     "jsonpath-plus": "^5.0.2",
     "node-wav-player": "^0.2.0",
-    "ws": "^7.4.2"
+    "ws": "^7.4.6"
   }
 }
