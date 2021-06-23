@@ -19,7 +19,7 @@ const http = require('http');
 const configFile = fs.readJsonSync(__dirname + "/../AudioServer/config.json");
 const audioDir = configFile.audioDir;
 const audioFilesDir = audioDir + "/wap/mp3";;
-const jsonDir = audioDir + "/wap/json/pw";
+const jsonDir = audioDir + "/wap/json";
 const cardConfig7070 = fs.readJsonSync(audioDir + "/soundquiz/soundquiz_rfid.json");
 const cardConfig9090 = fs.readJsonSync(audioDir + "/shp/shp_rfid.json");
 
