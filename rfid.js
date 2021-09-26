@@ -193,11 +193,15 @@ ws.on('open', function open() {
                         //Karte ist fuer Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start und liest Name der Playlist)
                         case 8080:
 
+                            //Soll der Name der Playlist vorgelesen werden?
+                            let readPlaylist = false;
+
                             //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
                             if (cardData.random) {
                                 //TODO: Refactor
                                 result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
                                 cardData = result[Math.floor(Math.random() * result.length)];
+                                readPlaylist = true;
                             }
 
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
@@ -205,7 +209,8 @@ ws.on('open', function open() {
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
                                 allowRandom: cardData.allowRandom,
-                                position: 0
+                                position: 0,
+                                readPlaylist: readPlaylist
                             });
                             http.get("http://localhost/php/activateAudioApp.php?mode=audio");
                             break;
@@ -239,16 +244,20 @@ ws.on('open', function open() {
                     //Karte kommt tatsaechlich aus dem gleichen Player -> Nachricht an WSS schicken
                     else {
 
+                        //welcher Modus soll gestartet werden
+                        let type = defaultType[port];
+
                         //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
                         if (cardData.random) {
                             //TODO: refactor
                             result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
                             cardData = result[Math.floor(Math.random() * result.length)];
+                            type = "set-playlist-read";
                         }
 
-                        console.log(defaultType[port] + " " + JSON.stringify(cardData));
+                        console.log(type + " " + JSON.stringify(cardData));
                         ws.send(JSON.stringify({
-                            type: defaultType[port],
+                            type: type,
                             value: cardData
                         }));
                     }
