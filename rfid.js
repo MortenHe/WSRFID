@@ -18,9 +18,10 @@ const http = require('http');
 //Configs
 const configFile = fs.readJsonSync(__dirname + "/../AudioServer/config.json");
 const audioDir = configFile.audioDir;
-const audioFilesDir = audioDir + "/wap/mp3";;
+const audioFilesDir = audioDir + "/wap/mp3";
 const jsonDir = audioDir + "/wap/json";
 const cardConfig7070 = fs.readJsonSync(audioDir + "/soundquiz/soundquiz_rfid.json");
+const randomConfig8080 = fs.readJsonSync(audioDir + "/wap/json/random_rfid.json");
 const cardConfig9090 = fs.readJsonSync(audioDir + "/shp/shp_rfid.json");
 
 //Keyboard-Eingaben auslesen (USB RFID-Leser ist eine Tastatur)
@@ -28,18 +29,28 @@ const InputEvent = require('input-event');
 const input = new InputEvent(configFile.USBRFIDReaderInput);
 const keyboard = new InputEvent.Keyboard(input);
 
-//Karten der Player sammeln
-cards = {};
+//RFID-Karten der Player sammeln
+const cards = {};
+
+//Alle Playlists sammeln fuer random-Abfrage. Variable muss json heissen
+const json = [];
 
 //Soundquiz-Karten
 for (let key in cardConfig7070) {
-    cards[key] = cardConfig7070[key]
+    cards[key] = cardConfig7070[key];
     cards[key]["port"] = 7070;
+};
+
+//Random Karten sammeln
+for (let key in randomConfig8080) {
+    cards[key] = randomConfig8080[key];
+    cards[key]["port"] = 8080;
+    cards[key]["random"] = true;
 };
 
 //SH Player Karten
 for (let key in cardConfig9090) {
-    cards[key] = cardConfig9090[key]
+    cards[key] = cardConfig9090[key];
     cards[key]["port"] = 9090;
 };
 
@@ -53,20 +64,31 @@ for (const [mode, data] of Object.entries(audiolist)) {
 
             //JSON-Datei laden (janosch.json)
             const filePath = jsonDir + "/" + mode + "/" + file.id + ".json";
-            const json = fs.readJSONSync(filePath);
+            const jsonData = fs.readJSONSync(filePath);
 
-            //mit JSONPath alle Eintraege finden, die einen RFID-Wert gesetzt haben
-            const result = JSONPath({ path: '$..rfid^', json });
+            //Ueber Playlists gehen
+            for (let obj of jsonData) {
 
-            //Eintrage mit RFID bei Karten sammeln
-            for (let obj of result) {
-                cards[obj.rfid] = {
+                //RFID-Karten sammeln
+                if (obj.rfid) {
+                    cards[obj.rfid] = {
+                        "allowRandom": data.allowRandom,
+                        "mode": mode,
+                        "name": obj.name,
+                        "path": file.id + "/" + obj.file,
+                        "port": 8080
+                    }
+                }
+
+                //Alle Playlists sammeln fuer Random-Anfrage
+                json.push({
                     "allowRandom": data.allowRandom,
                     "mode": mode,
+                    "group": file.id,
                     "name": obj.name,
                     "path": file.id + "/" + obj.file,
                     "port": 8080
-                }
+                });
             }
         }
     }
@@ -117,7 +139,9 @@ ws.on('open', function open() {
             //Nur RFID-Codes bearbeiten, die in Config hinterlegt sind
             if (rfidCode in cards) {
                 console.log("code exists in config");
-                const cardData = cards[rfidCode];
+
+                //let, weil Variable bei Random ueberschrieben wird
+                let cardData = cards[rfidCode];
                 const cardDataPort = cardData.port;
 
                 //Wenn wir nicht im passenden Player sind
@@ -166,8 +190,16 @@ ws.on('open', function open() {
                             }
                             break;
 
-                        //Karte kommt aus Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start)
+                        //Karte ist fuer Audioplayer: lastSession.json schreiben und Audio Player starten (dieser laedt lastSession.json beim Start und liest Name der Playlist)
                         case 8080:
+
+                            //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
+                            if (cardData.random) {
+                                //TODO: Refactor
+                                result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
+                                cardData = result[Math.floor(Math.random() * result.length)];
+                            }
+
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
                                 path: audioFilesDir + "/" + cardData.mode + "/" + cardData.path,
                                 activeItem: cardData.path,
@@ -206,6 +238,14 @@ ws.on('open', function open() {
 
                     //Karte kommt tatsaechlich aus dem gleichen Player -> Nachricht an WSS schicken
                     else {
+
+                        //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
+                        if (cardData.random) {
+                            //TODO: refactor
+                            result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
+                            cardData = result[Math.floor(Math.random() * result.length)];
+                        }
+
                         console.log(defaultType[port] + " " + JSON.stringify(cardData));
                         ws.send(JSON.stringify({
                             type: defaultType[port],
