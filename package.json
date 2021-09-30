@@ -17,10 +17,10 @@
   },
   "homepage": "https://github.com/MortenHe/WSRFID#readme",
   "dependencies": {
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^10.0.0",
     "input-event": "^1.2.6",
-    "jsonpath-plus": "^5.0.2",
+    "jsonpath-plus": "^6.0.1",
     "node-wav-player": "^0.2.0",
-    "ws": "^7.4.2"
+    "ws": "^8.2.2"
   }
 }
