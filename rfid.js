@@ -118,7 +118,7 @@ ws.on('open', function open() {
             //Wenn Code im Ziffernbereich (2-11 = 0-9) liegt -> Ziffer berechnen (Code 2 entspricht Ziffer 1) und RFID-Code verlaengern
             if (rawcode >= 2 && rawcode <= 11) {
                 const digit = ((rawcode - 1) % 10)
-                console.log("add digit to code " + digit);
+                //console.log("add digit to code " + digit);
                 rfidCode += digit;
             }
 
