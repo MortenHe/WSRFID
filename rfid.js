@@ -97,6 +97,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
 //Welches sind die Stanard-Kartenaktionen in dieser App (audio player -> playlist aendern)
 const defaultType = {
     "7070": "send-card-data",
+    //TODO: einfach set-playlist?
     "8080": "set-rfid-playlist",
     "9090": "set-audio-mode",
 };
