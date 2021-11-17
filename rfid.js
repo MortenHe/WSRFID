@@ -75,6 +75,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
                         "allowRandom": data.allowRandom,
                         "mode": mode,
                         "name": obj.name,
+                        "lang": obj.lang,
                         "path": file.id + "/" + obj.file,
                         "port": 8080
                     }
@@ -209,7 +210,7 @@ ws.on('open', function open() {
                                 path: audioFilesDir + "/" + cardData.mode + "/" + cardData.path,
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
-                                activeItemName: cardData.lang ?? "de-DE",
+                                activeItemLang: cardData.lang ?? "de-DE",
                                 allowRandom: cardData.allowRandom,
                                 position: 0,
                                 readPlaylist: readPlaylist
