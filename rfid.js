@@ -97,7 +97,6 @@ for (const [mode, data] of Object.entries(audiolist)) {
 //Welches sind die Stanard-Kartenaktionen in dieser App (audio player -> playlist aendern)
 const defaultType = {
     "7070": "send-card-data",
-    //TODO: einfach set-playlist?
     "8080": "set-rfid-playlist",
     "9090": "set-audio-mode",
 };
@@ -205,14 +204,18 @@ ws.on('open', function open() {
                                 readPlaylist = true;
                             }
 
+                            //lastSession Objekt schreiben
                             fs.writeJsonSync(__dirname + "/../AudioServer/lastSession.json", {
                                 path: audioFilesDir + "/" + cardData.mode + "/" + cardData.path,
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
+                                activeItemName: cardData.lang ?? "de-DE",
                                 allowRandom: cardData.allowRandom,
                                 position: 0,
                                 readPlaylist: readPlaylist
                             });
+
+                            //Player starten per HTTP starten
                             http.get("http://localhost/php/activateAudioApp.php?mode=audio");
                             break;
 
@@ -256,7 +259,6 @@ ws.on('open', function open() {
                             type = "set-playlist-read";
                         }
 
-                        console.log(type + " " + JSON.stringify(cardData));
                         ws.send(JSON.stringify({
                             type: type,
                             value: cardData
