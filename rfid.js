@@ -75,7 +75,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
                         "allowRandom": data.allowRandom,
                         "mode": mode,
                         "name": obj.name,
-                        "lang": obj.lang,
+                        "lang": obj.lang ?? "de-DE",
                         "path": file.id + "/" + obj.file,
                         "port": 8080
                     }
@@ -87,6 +87,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
                     "mode": mode,
                     "group": file.id,
                     "name": obj.name,
+                    "lang": obj.lang ?? "de-DE",
                     "path": file.id + "/" + obj.file,
                     "port": 8080
                 });
