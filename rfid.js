@@ -75,7 +75,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
                         "allowRandom": data.allowRandom,
                         "mode": mode,
                         "name": obj.name,
-                        "lang": obj.lang ?? "de-DE",
+                        "lang": obj.lang || "de-DE",
                         "path": file.id + "/" + obj.file,
                         "port": 8080
                     }
@@ -87,7 +87,7 @@ for (const [mode, data] of Object.entries(audiolist)) {
                     "mode": mode,
                     "group": file.id,
                     "name": obj.name,
-                    "lang": obj.lang ?? "de-DE",
+                    "lang": obj.lang || "de-DE",
                     "path": file.id + "/" + obj.file,
                     "port": 8080
                 });
@@ -211,7 +211,7 @@ ws.on('open', function open() {
                                 path: audioFilesDir + "/" + cardData.mode + "/" + cardData.path,
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
-                                activeItemLang: cardData.lang ?? "de-DE",
+                                activeItemLang: cardData.lang || "de-DE",
                                 allowRandom: cardData.allowRandom,
                                 position: 0,
                                 readPlaylist: readPlaylist
@@ -286,6 +286,6 @@ ws.on('open', function open() {
 
 //Einzelsound abspielen
 function playSound(sound) {
-    const playedSound = sound ?? "rfid.wav";
+    const playedSound = sound || "rfid.wav";
     singleSoundPlayer.play({ path: __dirname + "/" + playedSound });
 }
