@@ -19,7 +19,6 @@
   "dependencies": {
     "fs-extra": "^10.0.0",
     "input-event": "^1.2.6",
-    "jsonpath-plus": "^6.0.1",
     "node-wav-player": "^0.2.0",
     "ws": "^8.2.2"
   }

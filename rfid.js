@@ -10,7 +10,6 @@ const singleSoundPlayer = require('node-wav-player');
 
 //Configs laden fuer Tastatur-Input und RFID-Karten
 const fs = require('fs-extra');
-const { JSONPath } = require('jsonpath-plus');
 
 //HTTP Aufruf bei Wechsel zwischen audio und sh audio
 const http = require('http');
@@ -32,9 +31,6 @@ const keyboard = new InputEvent.Keyboard(input);
 //RFID-Karten der Player sammeln
 const cards = {};
 
-//Alle Playlists sammeln fuer random-Abfrage. Variable muss json heissen
-const json = [];
-
 //Soundquiz-Karten
 for (let key in cardConfig7070) {
     cards[key] = cardConfig7070[key];
@@ -42,8 +38,16 @@ for (let key in cardConfig7070) {
 };
 
 //Random Karten sammeln
+const randomData = [];
 for (let key in randomConfig8080) {
-    cards[key] = randomConfig8080[key];
+    const value = randomConfig8080[key].value;
+
+    //Bereich anlegen bei randomArr, z.B. "hsp/bibi-tina"
+    randomData[value] = [];
+
+    //Karteninfos sammeln
+    cards[key] = [];
+    cards[key]["value"] = value;
     cards[key]["port"] = 8080;
     cards[key]["random"] = true;
 };
@@ -81,16 +85,17 @@ for (const [mode, data] of Object.entries(audiolist)) {
                     }
                 }
 
-                //Alle Playlists sammeln fuer Random-Anfrage
-                json.push({
-                    "allowRandom": data.allowRandom,
-                    "mode": mode,
-                    "group": file.id,
-                    "name": obj.name,
-                    "lang": obj.lang || "de-DE",
-                    "path": file.id + "/" + obj.file,
-                    "port": 8080
-                });
+                //Wenn es fuer diesen Bereich (hsp/bibi-tina) eine Randomkarte gibt, Playlist darin merken
+                if (randomData[mode + "/" + file.id]) {
+                    randomData[mode + "/" + file.id].push({
+                        "allowRandom": data.allowRandom,
+                        "mode": mode,
+                        "name": obj.name,
+                        "lang": obj.lang || "de-DE",
+                        "path": file.id + "/" + obj.file,
+                        "port": 8080
+                    });
+                }
             }
         }
     }
@@ -200,8 +205,7 @@ ws.on('open', function open() {
 
                             //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
                             if (cardData.random) {
-                                //TODO: Refactor
-                                result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
+                                result = randomData[cardData.value];
                                 cardData = result[Math.floor(Math.random() * result.length)];
                                 readPlaylist = true;
                             }
@@ -255,8 +259,7 @@ ws.on('open', function open() {
 
                         //Wenn es eine Randomkarte ist, zufaellige Playlist aus einer Serie (z.B. bebl) oder eines Bereichs (z.B. kindermusik) auswaehlen
                         if (cardData.random) {
-                            //TODO: refactor
-                            result = JSONPath({ path: "$..*[?(@property === '" + cardData.key + "' && @ === '" + cardData.value + "')]^", json });
+                            result = randomData[cardData.value];
                             cardData = result[Math.floor(Math.random() * result.length)];
                             type = "set-playlist-read";
                         }
