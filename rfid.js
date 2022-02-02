@@ -71,12 +71,11 @@ for (const [mode, data] of Object.entries(audiolist)) {
             const jsonData = fs.readJSONSync(filePath);
 
             //Ueber Playlists gehen
-            for (let obj of jsonData) {
+            for (const obj of jsonData) {
 
                 //RFID-Karten sammeln
                 if (obj.rfid) {
                     cards[obj.rfid] = {
-                        "allowRandom": data.allowRandom,
                         "mode": mode,
                         "name": obj.name,
                         "lang": obj.lang || "de-DE",
@@ -88,7 +87,6 @@ for (const [mode, data] of Object.entries(audiolist)) {
                 //Wenn es fuer diesen Bereich (hsp/bibi-tina) eine Randomkarte gibt, Playlist darin merken
                 if (randomData[mode + "/" + file.id]) {
                     randomData[mode + "/" + file.id].push({
-                        "allowRandom": data.allowRandom,
                         "mode": mode,
                         "name": obj.name,
                         "lang": obj.lang || "de-DE",
@@ -216,7 +214,6 @@ ws.on('open', function open() {
                                 activeItem: cardData.path,
                                 activeItemName: cardData.name,
                                 activeItemLang: cardData.lang || "de-DE",
-                                allowRandom: cardData.allowRandom,
                                 position: 0,
                                 readPlaylist: readPlaylist
                             });
