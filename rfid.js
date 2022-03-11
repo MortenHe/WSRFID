@@ -137,9 +137,7 @@ ws.on('open', function open() {
         //RFID-Codelaenge = 10, wenn Enter kommt (Code 28)
         else if (rawcode === 28) {
             console.log("enter: final code " + rfidCode);
-
-            //Bestaetigungston abspielen
-            playSound();
+            playSound("rfid");
 
             //Nur RFID-Codes bearbeiten, die in Config hinterlegt sind
             if (rfidCode in cards) {
@@ -286,6 +284,5 @@ ws.on('open', function open() {
 
 //Einzelsound abspielen
 function playSound(sound) {
-    const playedSound = sound || "rfid.wav";
-    singleSoundPlayer.play({ path: __dirname + "/" + playedSound });
+    singleSoundPlayer.play({ path: audioDir + "/sounds/" + sound + ".wav" });
 }
